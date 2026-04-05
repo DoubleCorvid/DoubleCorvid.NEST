@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>DoubleCorvid's NEST</Title>
+    <Version>0.2.0-ALPHA</Version>
+    <Authors>DoubleCorvid</Authors>
+    <Company />
+    <Description>A plugin based REST server.</Description>
+    <Copyright>Copyright © Raven Crowe 2026</Copyright>
+    <PackageProjectUrl>https://github.com/ravencrowe01/DoubleCorvid.NEST</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ravencrowe01/DoubleCorvid.NEST</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.3.9" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DoubleCorvid.NEST.Plugin\DoubleCorvid.NEST.Plugin.csproj" />
+  </ItemGroup>
+
+</Project>
