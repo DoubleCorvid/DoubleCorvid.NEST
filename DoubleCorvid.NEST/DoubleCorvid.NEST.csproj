@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>DoubleCorvid's NEST Server - Plugins</Title>
+    <Title>DoubleCorvid's NEST Server - Metapackage</Title>
     <Version>0.1.0-ALPHA</Version>
     <Authors>DoubleCorvid</Authors>
     <Company />
