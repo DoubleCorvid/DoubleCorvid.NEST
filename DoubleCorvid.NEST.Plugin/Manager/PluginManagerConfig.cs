@@ -1,9 +1,10 @@
 using DoubleCorvid.NEST.Plugin.Load;
+using DoubleCorvid.NEST.Settings.Manager;
 
 namespace DoubleCorvid.NEST.Plugin.Manager;
 
-public class PluginManagerConfig {
-    public required string PluginsDirectory { get; init; }
-
+public class PluginManagerConfig : IPluginManagerConfig {
     public required IPluginLoadContextBuilder PluginLoadContextBuilder { get; init; }
+    
+    public required ISettingsManager SettingsManager { get; init; }
 }

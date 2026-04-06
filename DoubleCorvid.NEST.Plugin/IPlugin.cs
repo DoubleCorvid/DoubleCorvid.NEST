@@ -24,6 +24,8 @@ public interface IPlugin {
 
     string Copyright { get; }
 
+    string SettingsPath { get; }
+
     WebApplicationBuilder ConfigureAppBuilder (WebApplicationBuilder appBuilder);
 
     IMvcCoreBuilder ConfigureControllers (IMvcCoreBuilder builder);

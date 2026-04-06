@@ -3,8 +3,8 @@ using DoubleCorvid.NEST.Plugin.Load;
 
 namespace DoubleCorvid.NEST.Plugin.Manager;
 
-public class PluginManager : IPluginManager {
-    private readonly PluginManagerConfig _config;
+public class PluginManager (IPluginManagerConfig config) : IPluginManager {
+    private readonly IPluginManagerConfig _config = config;
 
     private readonly Dictionary<Guid, IPlugin> _plugins = [];
 
@@ -12,14 +12,8 @@ public class PluginManager : IPluginManager {
 
     public IPlugin this [Guid id] => _plugins [id];
 
-    public PluginManager (PluginManagerConfig config) {
-        _config = config;
-
-        LoadPlugins ();
-    }
-
-    private void LoadPlugins () {
-        var files = Directory.GetFiles (_config.PluginsDirectory);
+    public void LoadPlugins () {
+        var files = Directory.GetFiles (_config.SettingsManager.NESTSettings.PluginsDirectory);
 
         foreach (var file in files) {
             LoadPlugin (file);
