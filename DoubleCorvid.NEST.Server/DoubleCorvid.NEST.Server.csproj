@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>DoubleCorvid's NEST</Title>
-    <Version>0.2.0-ALPHA</Version>
+    <Version>0.3.0-ALPHA</Version>
     <Authors>DoubleCorvid</Authors>
     <Company />
     <Description>A plugin based REST server.</Description>
