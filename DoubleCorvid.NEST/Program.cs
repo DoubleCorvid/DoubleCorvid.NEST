@@ -9,6 +9,7 @@ namespace DoubleCorvid.NEST;
 
 public static class Program {
     private const string NESTSettingsFile = "nest.json";
+    private const string HostPluginFile = "DoubleCorvid.NEST.Plugin.Sample.dll";
     private const string PluginsRelativeDirectory = "plugins/";
     private const string ConfigRelativeDirectory = "config/";
 
@@ -17,6 +18,8 @@ public static class Program {
     private static string _cwd = "";
 
     private static string _nestSettingsPath = "";
+
+    private static string _hostPluginPath = "";
 
     private static string _pluginsDirectory = "";
 
@@ -41,8 +44,6 @@ public static class Program {
 
         _pluginManager = BuildPluginManager ();
 
-        _pluginManager.LoadPlugins ();
-
         _nestServer = BuildNESTServer ();
 
         _nestServer.InitilizeApp ();
@@ -59,6 +60,12 @@ public static class Program {
             var json = JsonSerializer.Serialize (new NESTSettings ()) ?? throw new Exception ("Failed to serialize a default instance of NEST settings");
 
             File.WriteAllText (_nestSettingsPath, json);
+        }
+
+        _hostPluginPath = Path.Combine (_cwd, HostPluginFile);
+
+        if (!File.Exists (_hostPluginPath)) {
+            throw new Exception ($"A host plugin was not found at {_hostPluginPath}.");
         }
 
         _pluginsDirectory = Path.Combine (_cwd, PluginsRelativeDirectory);
@@ -89,7 +96,6 @@ public static class Program {
         Args = _args,
         SettingsManager = _settingsManager ?? throw new Exception ("Settings manager wasn't initilized before attempting to use it."),
         PluginManager = _pluginManager ?? throw new Exception ("Plugin manager wasn't initilized before attempting to use it."),
+        HostPluginPath = _hostPluginPath,
     };
 }
-
-

@@ -1,6 +1,8 @@
+using DoubleCorvid.NEST.Plugin;
 using DoubleCorvid.NEST.Plugin.Manager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace DoubleCorvid.NEST.Server;
 
@@ -20,25 +22,33 @@ public class NESTServer (INESTServerConfig config) : INESTServer{
 
         var appBuilder = WebApplication.CreateBuilder (_config.Args);
 
-        var plugins = _config.PluginManager.Plugins.Values;
+        _config.PluginManager.LoadPlugin (_config.HostPluginPath);
 
-        foreach (var plugin in plugins) {
-            plugin.ConfigureAppBuilder (appBuilder);
-        }
+        var hostPlugin = _config.PluginManager.HostPlugin ?? throw new Exception ("Failed to load the host plugin.");
+
+        hostPlugin.ConfigureAppBuilder (appBuilder);
 
         var services = appBuilder.Services;
 
         services.AddSingleton<IPluginManager> (_config.PluginManager);
 
-        foreach (var plugin in plugins) {
-            plugin.ConfigureServices (services);
+        hostPlugin.ConfigureServices (services);
+
+        var serviceAdapter = new ServiceAdapter (services);
+
+        var pluginManager = _config.PluginManager;
+
+        foreach (var plugin in pluginManager.ControllerPlugins.Values) {
+            plugin.RegisterControllers (hostPlugin.GetMvcBuilder ());
+        }
+
+        foreach (var plugin in pluginManager.ServicePlugins.Values) {   
+            plugin.RegisterSevices (serviceAdapter);
         }
 
         _app = appBuilder.Build ();
 
-        foreach (var plugin in plugins) {
-            plugin.ConfigureApp (_app);
-        }
+        hostPlugin.ConfigureApp (_app);
 
         _initilized = true;
     }

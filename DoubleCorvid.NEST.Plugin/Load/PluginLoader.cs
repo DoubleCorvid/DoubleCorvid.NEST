@@ -1,3 +1,5 @@
+using System.Runtime.Loader;
+
 using DoubleCorvid.NEST.Plugin.Exceptions;
 
 namespace DoubleCorvid.NEST.Plugin.Load;
@@ -6,21 +8,21 @@ public class PluginLoader (IPluginLoadContextBuilder builder) {
     private readonly IPluginLoadContextBuilder _builder = builder;
 
     public IPlugin LoadPlugin (string pluginPath) {
-        var loadContext = _builder.WithPluginPath (pluginPath).Build ();
+        var loadContext = new AssemblyLoadContext (pluginPath);
 
         var asm = loadContext.LoadFromAssemblyPath (pluginPath);
 
-        var plugins = asm.GetTypes ().Where (t => t.IsAssignableTo (typeof (IPlugin))).ToList ();
+        var pluginTypes = asm.GetTypes ().Where (t => typeof (IPlugin).IsAssignableFrom (t)).ToList();
 
-        if (plugins.Count > 1) {
-            throw new TooManyPluginsException ($"Expected to find 1 assembly, found {plugins.Count}.");
+        if (pluginTypes.Count > 1) {
+            throw new TooManyPluginsException ($"Expected to find 1 assembly, found {pluginTypes.Count}.");
         }
 
-        if (plugins.Count == 0) {
+        if (pluginTypes.Count == 0) {
             throw new NoPluginFoundException ($"Expected to find 1 assembly, found none.");
         }
 
-        return (IPlugin) (Activator.CreateInstance (plugins [0]) 
+        return (IPlugin) (Activator.CreateInstance (pluginTypes [0]) 
                                                     ?? throw new FailedToCreatePluginInstanceException ("Failed to create an instance of the plugin definition."));
     }
 

@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace DoubleCorvid.NEST.Plugin;
 
 public interface IPlugin {
@@ -23,14 +20,4 @@ public interface IPlugin {
     string License { get; }
 
     string Copyright { get; }
-
-    string SettingsPath { get; }
-
-    WebApplicationBuilder ConfigureAppBuilder (WebApplicationBuilder appBuilder);
-
-    IMvcCoreBuilder ConfigureControllers (IMvcCoreBuilder builder);
-
-    IServiceCollection ConfigureServices (IServiceCollection services);
-
-    WebApplication ConfigureApp (WebApplication app);
 }

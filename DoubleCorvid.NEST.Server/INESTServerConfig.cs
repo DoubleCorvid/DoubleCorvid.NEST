@@ -9,4 +9,6 @@ public interface INESTServerConfig {
     ISettingsManager SettingsManager { get; }
 
     IPluginManager PluginManager { get; }
+
+    string HostPluginPath { get; }
 }
