@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ApplicationName>DoubleCorvid.NEST</ApplicationName>
     <Title>DoubleCorvid's NEST Server - Metapackage</Title>
     <Version>0.3.0-ALPHA</Version>
     <Authors>DoubleCorvid</Authors>

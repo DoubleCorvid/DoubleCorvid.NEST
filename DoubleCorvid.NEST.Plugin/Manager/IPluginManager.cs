@@ -1,6 +1,8 @@
 namespace DoubleCorvid.NEST.Plugin.Manager;
 
 public interface IPluginManager {
+    IReadOnlyDictionary<Guid, IPlugin> Plugins { get; }
+    
     IHostPlugin? HostPlugin { get; }
 
     IReadOnlyDictionary<Guid, IControllerPlugin> ControllerPlugins { get; }

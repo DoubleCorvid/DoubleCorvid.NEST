@@ -9,6 +9,4 @@ public interface IHostPlugin : IPlugin {
     IServiceCollection ConfigureServices (IServiceCollection services);
 
     WebApplication ConfigureApp (WebApplication app);
-
-    IMvcBuilder GetMvcBuilder ();
 }

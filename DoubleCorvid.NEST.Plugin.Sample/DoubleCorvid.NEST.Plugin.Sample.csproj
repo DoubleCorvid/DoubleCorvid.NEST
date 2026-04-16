@@ -4,12 +4,22 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Version>0.1.0-ALPHA</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DoubleCorvid.NEST.Plugin\DoubleCorvid.NEST.Plugin.csproj" />
-    <ProjectReference Include="..\DoubleCorvid.NEST.Server\DoubleCorvid.NEST.Server.csproj" />
-    <ProjectReference Include="..\DoubleCorvid.NEST.Settings\DoubleCorvid.NEST.Settings.csproj" />
+    <ProjectReference Include="..\DoubleCorvid.NEST.Plugin\DoubleCorvid.NEST.Plugin.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    
+    <ProjectReference Include="..\DoubleCorvid.NEST.Server\DoubleCorvid.NEST.Server.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+
+    <ProjectReference Include="..\DoubleCorvid.NEST.Settings\DoubleCorvid.NEST.Settings.csproj">
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

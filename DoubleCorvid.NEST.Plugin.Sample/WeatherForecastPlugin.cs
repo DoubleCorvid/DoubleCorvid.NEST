@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DoubleCorvid.NEST.Plugin.Sample;
@@ -24,8 +25,8 @@ public class WeatherForecastPlugin : IHostPlugin, IServicePlugin, IControllerPlu
 
     public string Copyright => "Copyright © DoubleCorvid";
 
-    private IMvcBuilder? _mvcBuilder = null;
-    
+    public IEnumerable<Type> ControllerTypes { get; } = [typeof (WeatherForecastController)];
+
     public void RegisterSevices (IServiceAdapter serviceAdapter) {
         
     }
@@ -35,16 +36,12 @@ public class WeatherForecastPlugin : IHostPlugin, IServicePlugin, IControllerPlu
     }
 
     public IServiceCollection ConfigureServices (IServiceCollection services) {
-        _mvcBuilder = services.AddMvc ();
-
         return services;
     }
 
     public WebApplication ConfigureApp (WebApplication app) {
         return app;
     }
-
-    public IMvcBuilder GetMvcBuilder () => _mvcBuilder ?? throw new Exception ("Services must be configured first before the MVC builder is populated");
 
     public void RegisterControllers (IMvcBuilder mvcBuilder) {
         mvcBuilder.AddControllersAsServices ().AddApplicationPart (this.GetType ().Assembly);

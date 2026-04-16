@@ -1,5 +1,3 @@
-using System.Runtime.Loader;
-
 using DoubleCorvid.NEST.Plugin.Exceptions;
 
 namespace DoubleCorvid.NEST.Plugin.Load;
@@ -8,11 +6,13 @@ public class PluginLoader (IPluginLoadContextBuilder builder) {
     private readonly IPluginLoadContextBuilder _builder = builder;
 
     public IPlugin LoadPlugin (string pluginPath) {
-        var loadContext = new AssemblyLoadContext (pluginPath);
+        var loadContext = _builder.WithPluginPath (pluginPath).Build ();
 
         var asm = loadContext.LoadFromAssemblyPath (pluginPath);
 
-        var pluginTypes = asm.GetTypes ().Where (t => typeof (IPlugin).IsAssignableFrom (t)).ToList();
+        var types = new List<Type> ();
+
+        var pluginTypes = asm.GetExportedTypes ().Where (t => t.GetInterfaces ().Any (i => i.FullName == typeof(IPlugin).FullName)).ToList();
 
         if (pluginTypes.Count > 1) {
             throw new TooManyPluginsException ($"Expected to find 1 assembly, found {pluginTypes.Count}.");

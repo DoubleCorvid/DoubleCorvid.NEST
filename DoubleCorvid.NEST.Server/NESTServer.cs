@@ -1,8 +1,8 @@
 using DoubleCorvid.NEST.Plugin;
 using DoubleCorvid.NEST.Plugin.Manager;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace DoubleCorvid.NEST.Server;
 
@@ -28,9 +28,12 @@ public class NESTServer (INESTServerConfig config) : INESTServer{
 
         hostPlugin.ConfigureAppBuilder (appBuilder);
 
-        var services = appBuilder.Services;
+        var services = appBuilder.Services.AddSingleton<IPluginManager> (_config.PluginManager);
 
-        services.AddSingleton<IPluginManager> (_config.PluginManager);
+        services.AddMvc ()
+        .ConfigureApplicationPartManager (m => {
+            m.FeatureProviders.Add (new PluginControllerFeatureProvider (_config.PluginManager));
+        });
 
         hostPlugin.ConfigureServices (services);
 
@@ -38,19 +41,21 @@ public class NESTServer (INESTServerConfig config) : INESTServer{
 
         var pluginManager = _config.PluginManager;
 
-        foreach (var plugin in pluginManager.ControllerPlugins.Values) {
-            plugin.RegisterControllers (hostPlugin.GetMvcBuilder ());
-        }
-
         foreach (var plugin in pluginManager.ServicePlugins.Values) {   
             plugin.RegisterSevices (serviceAdapter);
         }
 
         _app = appBuilder.Build ();
 
-        hostPlugin.ConfigureApp (_app);
+        _app.UseHttpsRedirection ();
+
+        _app.MapControllers ();
 
         _initilized = true;
+    }
+
+    private void BuildMvcOptions (MvcOptions options) {
+        throw new NotImplementedException ();
     }
 
     public void Run () {
