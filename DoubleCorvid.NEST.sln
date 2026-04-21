@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST", "DoubleCorvid.NEST\DoubleCorvid.NEST.csproj", "{BB7E7537-4844-4A45-911D-E1314121C258}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST.FileManagement", "DoubleCorvid.NEST.FileManagement\DoubleCorvid.NEST.FileManagement.csproj", "{7065473B-547D-40CD-AF3B-9DBACE7848DF}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST.Plugin", "DoubleCorvid.NEST.Plugin\DoubleCorvid.NEST.Plugin.csproj", "{016E6830-57CF-4D55-A69D-1EC0107B489C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST.Plugin.Sample", "DoubleCorvid.NEST.Plugin.Sample\DoubleCorvid.NEST.Plugin.Sample.csproj", "{61E2B1C1-C960-4661-A060-A6CED8349CFD}"
@@ -46,5 +48,13 @@ Global
 		{61E2B1C1-C960-4661-A060-A6CED8349CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61E2B1C1-C960-4661-A060-A6CED8349CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61E2B1C1-C960-4661-A060-A6CED8349CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E79CC6-2E82-4C70-9C3F-F6CF6820E302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E79CC6-2E82-4C70-9C3F-F6CF6820E302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E79CC6-2E82-4C70-9C3F-F6CF6820E302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E79CC6-2E82-4C70-9C3F-F6CF6820E302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
