@@ -1,11 +1,13 @@
 ﻿namespace DoubleCorvid.NEST.FileManagement;
 
-public class NESTFileManager (FileManagerConfig config) {
+public class FileManager (FileManagerConfig config) {
     private readonly FileManagerConfig _config = config;
 
-    private readonly Dictionary<string, NESTFile> _files = [];
+    private readonly Dictionary<string, ManagedFile> _files = [];
 
-    public NESTFile LoadFile (string fullPath, bool getCachedIfAvailable = true) {
+    public ManagedFile LoadFile (string fullPath, bool preferCached = true) {
+        ArgumentNullException.ThrowIfNullOrWhiteSpace (fullPath);
+
         var info = new FileInfo (fullPath);
 
         if (!info.Exists) {
@@ -14,22 +16,23 @@ public class NESTFileManager (FileManagerConfig config) {
            info.Refresh ();
         }
 
-        if (getCachedIfAvailable && _files.TryGetValue (info.FullName, out var existing)) {
+        if (preferCached && _files.TryGetValue (info.FullName, out var existing)) {
             return existing;
         }
 
-        var file = new NESTFile (info, _config.Encoding);
+        var file = new ManagedFile (info, _config.Encoding);
 
-        if (!_files.TryAdd (file.Info.FullName, file)) {
-            throw new Exception ($"File already loaded: {file.Info.FullName}");
+        if (!_files.TryAdd (file.FullName, file)) {
+            throw new Exception ($"File already loaded: {file.FullName}");
         }
 
         return file;
     }
 
-    public bool UnloadFile (NESTFile file) => _files.Remove (file.Info.FullName);
+    public bool UnloadFile (ManagedFile file) => _files.Remove (file.FullName);
 
-    public NESTFile? GetFile (string fullName) {
+
+    public ManagedFile? TryGetFile (string fullName) {
         _files.TryGetValue (fullName, out var file);
 
         return file;

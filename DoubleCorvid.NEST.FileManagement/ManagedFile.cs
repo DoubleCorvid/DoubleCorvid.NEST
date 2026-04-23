@@ -2,8 +2,10 @@ using System.Text;
 
 namespace DoubleCorvid.NEST.FileManagement;
 
-public class NESTFile (FileInfo info, Encoding encoding) {
+public class ManagedFile (FileInfo info, Encoding encoding) {
     public FileInfo Info { get; } = info;
+
+    public string FullName => Info.FullName;
 
     private readonly Encoding _encoding = encoding;
 

@@ -3,44 +3,46 @@ using System.Text.Json;
 
 namespace DoubleCorvid.NEST.Settings.Manager;
 
-public class SettingsManager : ISettingsManager {
-    public INESTSettings NESTSettings { get; }
+public class SettingsManager (SettingsManagerConfig config) : ISettingsManager {
+    private readonly SettingsManagerConfig _config = config;
 
     private readonly Dictionary<string, ISettings> _settings = [];
 
-    public SettingsManager (string path) {
-        NESTSettings = (INESTSettings) LoadSettingsFile<NESTSettings> (path);
-    }
-
-    public ISettings? TryGet (string name) {
-        if (_settings.TryGetValue (name, out var found)) {
+    public ISettings? TryGet (string fullName) {
+        if (_settings.TryGetValue (fullName, out var found)) {
             return found;
         }
 
         return null;
     }
 
-    public ISettings LoadSettingsFile<T> (string file) where T : ISettings {
-        if (string.IsNullOrWhiteSpace (file)) {
-            throw new Exception ("The provided path was null or whitespace");
+    public ISettings LoadSettingsFile<T> (string fullPath, bool preferCached = true) where T : ISettings {
+        ArgumentNullException.ThrowIfNullOrWhiteSpace (fullPath);
+
+        var file = _config.FileManager.LoadFile (fullPath);
+
+        string fullName = file.FullName;
+
+        if (preferCached && _settings.TryGetValue (fullName, out var cached)) {
+            return cached;
         }
 
-        if (!File.Exists (file)) {
-            throw new Exception ("Provided file path doesn't exist");
-        }
+        var contents = file.Read ();
 
-        var name = Path.GetFileNameWithoutExtension (file);
+        var settings = JsonSerializer.Deserialize<T> (contents) ?? throw new Exception ($"Failed to Deserialize settings from file {fullName}.");
 
-        if (_settings.ContainsKey (name)) {
-            throw new Exception ($"Already loaded settings from file {file}.");
-        }
+        settings.File = file;
 
-        var contents = File.ReadAllText (file);
-
-        var settings = JsonSerializer.Deserialize<T> (contents) ?? throw new Exception ($"Failed to Deserialize settings from file {file}.");
-
-        _settings.Add (name, settings);
+        _settings [fullName] = settings;
 
         return settings;
+    }
+
+    public bool UnloadSettings (ISettings settings) {
+        var file = settings.File;
+
+        _config.FileManager.UnloadFile (file);
+
+        return _settings.Remove (file.FullName);
     }
 }

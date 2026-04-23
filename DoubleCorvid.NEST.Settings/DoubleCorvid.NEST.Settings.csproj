@@ -29,4 +29,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DoubleCorvid.NEST.FileManagement\DoubleCorvid.NEST.FileManagement.csproj" />
+  </ItemGroup>
+
 </Project>

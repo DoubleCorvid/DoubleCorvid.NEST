@@ -1,9 +1,11 @@
+using DoubleCorvid.NEST.FileManagement;
+
 namespace DoubleCorvid.NEST.Settings.Manager;
 
 public interface ISettingsManager {
-    INESTSettings NESTSettings { get; }
-    
-    ISettings? TryGet (string name);
+    ISettings? TryGet (string fullName);
 
-    ISettings LoadSettingsFile<T> (string file) where T : ISettings;
+    ISettings LoadSettingsFile<T> (string file, bool preferCached = true) where T : ISettings;
+
+    bool UnloadSettings (ISettings file);
 }
