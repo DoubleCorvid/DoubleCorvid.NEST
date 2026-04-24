@@ -6,7 +6,7 @@ namespace DoubleCorvid.NEST.Settings;
 
 public class NESTSettings : INESTSettings {
     [JsonIgnore]
-    public required ManagedFile File { get; set; }
+    public string FullName { get; set; } = "";
 
     [JsonIgnore]
     public string PluginsDirectory { get; set; } = "";

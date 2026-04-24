@@ -29,7 +29,7 @@ public class FileManager (FileManagerConfig config) : IFileManager {
         return file;
     }
 
-    public bool UnloadFile (ManagedFile file) => _files.Remove (file.FullName);
+    public bool UnloadFile (string fullName) => _files.Remove (fullName);
 
 
     public ManagedFile? TryGetFile (string fullName) {

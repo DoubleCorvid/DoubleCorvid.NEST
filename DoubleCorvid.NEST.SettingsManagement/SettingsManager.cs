@@ -30,18 +30,18 @@ public class SettingsManager (SettingsManagerConfig config) : ISettingsManager {
 
         var settings = JsonSerializer.Deserialize<T> (contents) ?? throw new Exception ($"Failed to Deserialize settings from file {fullName}.");
 
-        settings.File = file;
+        if (string.IsNullOrEmpty (settings.FullName)) {
+            settings.FullName = fullName;
+        }
 
-        _settings [fullName] = settings;
+        _settings [settings.FullName] = settings;
 
         return settings;
     }
 
-    public bool UnloadSettings (ISettings settings) {
-        var file = settings.File;
+    public bool UnloadSettings (string fullName) {
+        _config.FileManager.UnloadFile (fullName);
 
-        _config.FileManager.UnloadFile (file);
-
-        return _settings.Remove (file.FullName);
+        return _settings.Remove (fullName);
     }
 }
