@@ -7,7 +7,7 @@ public class ManagedFile (FileInfo info, Encoding encoding) {
 
     public string FullName => Info.FullName;
 
-    private readonly Encoding _encoding = encoding;
+    public Encoding Encoding { get; } = encoding;
 
     public void Create (bool recreate = false) {
         if (Info.Exists) {
@@ -27,7 +27,7 @@ public class ManagedFile (FileInfo info, Encoding encoding) {
 
         using var fs = Info.OpenRead ();
 
-        using var reader = new StreamReader (fs, _encoding);
+        using var reader = new StreamReader (fs, Encoding);
 
         var content = reader.ReadToEnd ();
 
@@ -39,7 +39,7 @@ public class ManagedFile (FileInfo info, Encoding encoding) {
         
         using var fs = Info.OpenWrite ();
 
-        using var writer = new StreamWriter (fs, _encoding);
+        using var writer = new StreamWriter (fs, Encoding);
 
         Create (true);
 
