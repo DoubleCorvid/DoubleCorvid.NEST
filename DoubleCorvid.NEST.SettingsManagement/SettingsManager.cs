@@ -17,7 +17,7 @@ public class SettingsManager (SettingsManagerConfig config) : ISettingsManager {
         return null;
     }
 
-    public ISettings LoadSettingsFile<T> (string fullPath, bool preferCached = true) where T : ISettings {
+    public ISettings LoadSettingsFile<T> (string fullPath, bool preferCached = true, bool createDefault = true) where T : ISettings {
         ArgumentNullException.ThrowIfNullOrWhiteSpace (fullPath);
 
         var file = _config.FileManager.LoadFile (fullPath);
@@ -30,7 +30,14 @@ public class SettingsManager (SettingsManagerConfig config) : ISettingsManager {
 
         var contents = file.Read ();
 
-        var settings = JsonSerializer.Deserialize<T> (contents) ?? throw new Exception ($"Failed to Deserialize settings from file {fullName}.");
+        ISettings settings;
+
+        if (string.IsNullOrEmpty (contents)) {
+            settings = Activator.CreateInstance<T> ();
+        }
+        else {
+            settings = JsonSerializer.Deserialize<T> (contents) ?? throw new Exception ($"Failed to Deserialize settings from file {fullName}.");
+        }
 
         if (string.IsNullOrEmpty (settings.FullName)) {
             settings.FullName = fullName;

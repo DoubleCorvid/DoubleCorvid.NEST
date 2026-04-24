@@ -21,7 +21,13 @@ public class PluginManager : IPluginManager {
     public PluginManager (IPluginManagerConfig config) {
         _config = config;
 
-        LoadPlugins (_config.SettingsManager.NESTSettings.ConfigDirectory);
+        var pluginDir = _config.SettingsManager.NESTSettings.PluginsDirectory;
+
+        if (!Directory.Exists (pluginDir)) {
+            Directory.CreateDirectory (pluginDir);
+        }
+
+        LoadPlugins (pluginDir);
     }
 
     public IReadOnlyDictionary<Guid, IControllerPlugin> ControllerPlugins => new Dictionary<Guid, IControllerPlugin> (_controllerPlugins);
