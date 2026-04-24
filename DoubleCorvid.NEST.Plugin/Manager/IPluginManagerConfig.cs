@@ -1,5 +1,5 @@
 using DoubleCorvid.NEST.Plugin.Load;
-using DoubleCorvid.NEST.Settings.Manager;
+using DoubleCorvid.NEST.SettingsManagement;
 
 namespace DoubleCorvid.NEST.Plugin.Manager;
 

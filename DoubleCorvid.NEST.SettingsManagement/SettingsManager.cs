@@ -1,7 +1,6 @@
 using System.Text.Json;
 
-
-namespace DoubleCorvid.NEST.Settings.Manager;
+namespace DoubleCorvid.NEST.SettingsManagement;
 
 public class SettingsManager (SettingsManagerConfig config) : ISettingsManager {
     private readonly SettingsManagerConfig _config = config;

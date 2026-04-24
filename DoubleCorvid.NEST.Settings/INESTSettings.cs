@@ -1,3 +1,5 @@
+using DoubleCorvid.NEST.SettingsManagement;
+
 namespace DoubleCorvid.NEST.Settings;
 
 public interface INESTSettings : ISettings {

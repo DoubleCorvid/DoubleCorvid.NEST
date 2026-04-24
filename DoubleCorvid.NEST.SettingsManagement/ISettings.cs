@@ -1,6 +1,6 @@
 ﻿using DoubleCorvid.NEST.FileManagement;
 
-namespace DoubleCorvid.NEST.Settings;
+namespace DoubleCorvid.NEST.SettingsManagement;
 
 public interface ISettings {
     ManagedFile File { get; set; }

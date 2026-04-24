@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST.Server", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST.Settings", "DoubleCorvid.NEST.Settings\DoubleCorvid.NEST.Settings.csproj", "{14FD4CF9-EA8E-48F1-9817-D53BEBDA864E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleCorvid.NEST.SettingsManagement", "DoubleCorvid.NEST.SettingsManagement\DoubleCorvid.NEST.SettingsManagement.csproj", "{FE0CCB32-9B14-4A20-8545-8098936493CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,5 +58,9 @@ Global
 		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7065473B-547D-40CD-AF3B-9DBACE7848DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0CCB32-9B14-4A20-8545-8098936493CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0CCB32-9B14-4A20-8545-8098936493CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0CCB32-9B14-4A20-8545-8098936493CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0CCB32-9B14-4A20-8545-8098936493CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

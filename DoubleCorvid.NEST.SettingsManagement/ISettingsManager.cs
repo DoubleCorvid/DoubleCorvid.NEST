@@ -1,6 +1,4 @@
-using DoubleCorvid.NEST.FileManagement;
-
-namespace DoubleCorvid.NEST.Settings.Manager;
+namespace DoubleCorvid.NEST.SettingsManagement;
 
 public interface ISettingsManager {
     ISettings? TryGet (string fullName);
