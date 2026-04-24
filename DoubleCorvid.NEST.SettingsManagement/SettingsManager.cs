@@ -7,6 +7,8 @@ public class SettingsManager (SettingsManagerConfig config) : ISettingsManager {
 
     private readonly Dictionary<string, ISettings> _settings = [];
 
+    public IReadOnlyDictionary<string, ISettings> Settings => _settings;
+
     public ISettings? TryGet (string fullName) {
         if (_settings.TryGetValue (fullName, out var found)) {
             return found;

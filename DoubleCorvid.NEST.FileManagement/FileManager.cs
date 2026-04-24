@@ -5,6 +5,8 @@ public class FileManager (FileManagerConfig config) : IFileManager {
 
     private readonly Dictionary<string, ManagedFile> _files = [];
 
+    public IReadOnlyDictionary<string, ManagedFile> Files => _files;
+
     public ManagedFile LoadFile (string fullPath, bool preferCached = true) {
         ArgumentNullException.ThrowIfNullOrWhiteSpace (fullPath);
 
