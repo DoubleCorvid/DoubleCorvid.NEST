@@ -28,7 +28,6 @@ public class WeatherForecastPlugin : IHostPlugin, IServicePlugin, IControllerPlu
     public IEnumerable<Type> ControllerTypes { get; } = [typeof (WeatherForecastController)];
 
     public void RegisterSevices (IServiceAdapter serviceAdapter) {
-        
     }
 
     public void ConfigureAppBuilder (WebApplicationBuilder appBuilder) {
