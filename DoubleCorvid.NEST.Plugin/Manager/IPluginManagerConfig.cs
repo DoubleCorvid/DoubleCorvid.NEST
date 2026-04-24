@@ -1,10 +1,10 @@
 using DoubleCorvid.NEST.Plugin.Load;
-using DoubleCorvid.NEST.SettingsManagement;
+using DoubleCorvid.NEST.Settings;
 
 namespace DoubleCorvid.NEST.Plugin.Manager;
 
 public interface IPluginManagerConfig {
-    ISettingsManager SettingsManager { get; }
+    INESTSettingsManager SettingsManager { get; }
     
     IPluginLoadContextBuilder PluginLoadContextBuilder { get; }
 }

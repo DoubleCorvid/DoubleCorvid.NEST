@@ -1,6 +1,6 @@
 ﻿namespace DoubleCorvid.NEST.FileManagement;
 
-public class FileManager (FileManagerConfig config) {
+public class FileManager (FileManagerConfig config) : IFileManager {
     private readonly FileManagerConfig _config = config;
 
     private readonly Dictionary<string, ManagedFile> _files = [];

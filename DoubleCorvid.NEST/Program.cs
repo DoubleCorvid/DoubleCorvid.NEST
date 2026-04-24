@@ -1,9 +1,8 @@
-﻿using System.Text.Json;
+﻿using DoubleCorvid.NEST.FileManagement;
 using DoubleCorvid.NEST.Plugin.Load;
 using DoubleCorvid.NEST.Plugin.Manager;
 using DoubleCorvid.NEST.Server;
 using DoubleCorvid.NEST.Settings;
-using DoubleCorvid.NEST.Settings.Manager;
 
 namespace DoubleCorvid.NEST;
 
@@ -25,9 +24,11 @@ public static class Program {
 
     private static string _configDirectory = "";
 
-    private static SettingsManager? _settingsManager = null;
+    private static IFileManager? _fileManager = null;
 
-    private static PluginManager? _pluginManager = null;
+    private static NESTSettingsManager? _settingsManager = null;
+
+    private static IPluginManager? _pluginManager = null;
 
     private static NESTServer? _nestServer = null;
 
@@ -35,6 +36,8 @@ public static class Program {
         _args = args;
 
         SetupEnvironment ();
+
+        _fileManager = BuildFileManager ();
 
         _settingsManager = BuildSettingsManager ();
 
@@ -56,11 +59,11 @@ public static class Program {
 
         _nestSettingsPath = Path.Combine (_cwd, NESTSettingsFile);
 
-        if (!File.Exists (_nestSettingsPath)) {
-            var json = JsonSerializer.Serialize (new NESTSettings ()) ?? throw new Exception ("Failed to serialize a default instance of NEST settings");
+        // if (!File.Exists (_nestSettingsPath)) {
+        //     var json = JsonSerializer.Serialize (new NESTSettings ()) ?? throw new Exception ("Failed to serialize a default instance of NEST settings");
 
-            File.WriteAllText (_nestSettingsPath, json);
-        }
+        //     File.WriteAllText (_nestSettingsPath, json);
+        // }
 
         _hostPluginPath = Path.Combine (_cwd, HostPluginFile);
 
@@ -81,7 +84,22 @@ public static class Program {
         }
     }
 
-    private static SettingsManager BuildSettingsManager () => new (_nestSettingsPath);
+    private static FileManager BuildFileManager () => new (BuildFileManagerConfig ());
+
+    private static FileManagerConfig BuildFileManagerConfig () {
+        return new () {
+            Encoding = System.Text.Encoding.UTF8
+        };
+    }
+
+    private static NESTSettingsManager BuildSettingsManager () => new (BuildSettingsManagerConfig ());
+
+    private static NESTSettingsManagerConfig BuildSettingsManagerConfig () {
+        return new NESTSettingsManagerConfig {
+            FileManager = _fileManager ?? throw new Exception ("Settings manager wasn't initilized before attempting to use it."),
+            NESTSettingsFullPath = _nestSettingsPath
+        };
+    }
 
     private static PluginManager BuildPluginManager () => new (BuildPluginManagerConfig ());
 

@@ -37,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DoubleCorvid.NEST.Plugin\DoubleCorvid.NEST.Plugin.csproj" />
     <ProjectReference Include="..\DoubleCorvid.NEST.Settings\DoubleCorvid.NEST.Settings.csproj" />
+    <ProjectReference Include="..\DoubleCorvid.NEST.SettingsManagement\DoubleCorvid.NEST.SettingsManagement.csproj" />
   </ItemGroup>
 
 </Project>

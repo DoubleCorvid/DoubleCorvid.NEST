@@ -31,16 +31,13 @@ public class WeatherForecastPlugin : IHostPlugin, IServicePlugin, IControllerPlu
         
     }
 
-    public WebApplicationBuilder ConfigureAppBuilder (WebApplicationBuilder appBuilder) {
-        return appBuilder;
+    public void ConfigureAppBuilder (WebApplicationBuilder appBuilder) {
     }
 
-    public IServiceCollection ConfigureServices (IServiceCollection services) {
-        return services;
+    public void ConfigureServices (IServiceCollection services) {
     }
 
-    public WebApplication ConfigureApp (WebApplication app) {
-        return app;
+    public void ConfigureApp (WebApplication app) {
     }
 
     public void RegisterControllers (IMvcBuilder mvcBuilder) {
