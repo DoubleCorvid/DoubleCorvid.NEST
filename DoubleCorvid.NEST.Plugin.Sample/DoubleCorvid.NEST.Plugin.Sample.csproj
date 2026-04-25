@@ -20,14 +20,6 @@
     <ProjectReference Include="..\DoubleCorvid.NEST.Settings\DoubleCorvid.NEST.Settings.csproj">
       <Private>false</Private>
     </ProjectReference>
-
-    <ProjectReference Include="..\DoubleCorvid.NEST.FileManagement\DoubleCorvid.NEST.FileManagement.csproj">
-      <Private>false</Private>
-    </ProjectReference>
-
-    <ProjectReference Include="..\DoubleCorvid.NEST.SettingsManagement\DoubleCorvid.NEST.SettingsManagement.csproj">
-      <Private>false</Private>
-    </ProjectReference>
   </ItemGroup>
 
 </Project>

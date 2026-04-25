@@ -30,8 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DoubleCorvid.NEST.FileManagement\DoubleCorvid.NEST.FileManagement.csproj" />
-    <ProjectReference Include="..\DoubleCorvid.NEST.SettingsManagement\DoubleCorvid.NEST.SettingsManagement.csproj" />
+    <PackageReference Include="DoubleCorvid.Grimoire.Files" Version="0.16.0-ALPHA" />
+    <PackageReference Include="DoubleCorvid.Grimoire.Settings" Version="0.16.0-ALPHA" />
   </ItemGroup>
 
 </Project>

@@ -35,7 +35,11 @@
   <ItemGroup>
     <ProjectReference Include="..\DoubleCorvid.NEST.Plugin\DoubleCorvid.NEST.Plugin.csproj" />
     <ProjectReference Include="..\DoubleCorvid.NEST.Server\DoubleCorvid.NEST.Server.csproj" />
-    <ProjectReference Include="..\DoubleCorvid.NEST.Settings\DoubleCorvid.NEST.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DoubleCorvid.Grimoire.Files" Version="0.16.0-ALPHA" />
+    <PackageReference Include="DoubleCorvid.Grimoire.Settings" Version="0.16.0-ALPHA" />
   </ItemGroup>
 
 </Project>

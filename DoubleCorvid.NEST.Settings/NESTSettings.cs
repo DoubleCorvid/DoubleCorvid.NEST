@@ -1,7 +1,5 @@
 using System.Text.Json.Serialization;
 
-using DoubleCorvid.NEST.FileManagement;
-
 namespace DoubleCorvid.NEST.Settings;
 
 public class NESTSettings : INESTSettings {

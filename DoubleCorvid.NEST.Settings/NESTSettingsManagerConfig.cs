@@ -1,4 +1,4 @@
-using DoubleCorvid.NEST.SettingsManagement;
+using DoubleCorvid.Grimoire.Settings;
 
 namespace DoubleCorvid.NEST.Settings;
 
