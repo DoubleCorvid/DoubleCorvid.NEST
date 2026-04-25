@@ -1,3 +1,4 @@
+using DoubleCorvid.Grimoire.Files;
 using DoubleCorvid.NEST.Plugin.Manager;
 using DoubleCorvid.NEST.Settings;
 
@@ -5,6 +6,8 @@ namespace DoubleCorvid.NEST.Server;
 
 public class NESTServerConfig : INESTServerConfig {
     public required string[] Args { get; init; }
+
+    public required IFileManager FileManager { get; init; }
 
     public required INESTSettingsManager SettingsManager { get; init; }
 

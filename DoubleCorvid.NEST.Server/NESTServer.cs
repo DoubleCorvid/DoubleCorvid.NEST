@@ -1,5 +1,8 @@
+using DoubleCorvid.Grimoire.Files;
 using DoubleCorvid.NEST.Plugin;
 using DoubleCorvid.NEST.Plugin.Manager;
+using DoubleCorvid.NEST.Settings;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,24 +25,28 @@ public class NESTServer (INESTServerConfig config) : INESTServer{
 
         var appBuilder = WebApplication.CreateBuilder (_config.Args);
 
-        _config.PluginManager.LoadPlugin (_config.HostPluginPath);
+        var pluginManager = _config.PluginManager;
 
-        var hostPlugin = _config.PluginManager.HostPlugin ?? throw new Exception ("Failed to load the host plugin.");
+        pluginManager.LoadPlugin (_config.HostPluginPath);
+
+        var hostPlugin = pluginManager.HostPlugin ?? throw new Exception ("Failed to load the host plugin.");
 
         hostPlugin.ConfigureAppBuilder (appBuilder);
 
-        var services = appBuilder.Services.AddSingleton<IPluginManager> (_config.PluginManager);
+        var services = appBuilder.Services.AddSingleton<IPluginManager> (pluginManager);
 
         services.AddMvc ()
         .ConfigureApplicationPartManager (m => {
-            m.FeatureProviders.Add (new PluginControllerFeatureProvider (_config.PluginManager));
+            m.FeatureProviders.Add (new PluginControllerFeatureProvider (pluginManager));
         });
+
+        services.AddSingleton<IFileManager> (_config.FileManager);
+
+        services.AddSingleton<INESTSettingsManager> (_config.SettingsManager);
 
         hostPlugin.ConfigureServices (services);
 
         var serviceAdapter = new ServiceAdapter (services);
-
-        var pluginManager = _config.PluginManager;
 
         foreach (var plugin in pluginManager.ServicePlugins.Values) {   
             plugin.RegisterSevices (serviceAdapter);

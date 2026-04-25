@@ -26,7 +26,7 @@ public static class Program {
 
     private static IFileManager? _fileManager = null;
 
-    private static NESTSettingsManager? _settingsManager = null;
+    private static INESTSettingsManager? _settingsManager = null;
 
     private static IPluginManager? _pluginManager = null;
 
@@ -94,6 +94,7 @@ public static class Program {
 
     private static NESTServerConfig BuildNESTServerConfig () => new () {
         Args = _args,
+        FileManager = _fileManager ?? throw new Exception ("File manager wasn't initilized before attempting to use it."),
         SettingsManager = _settingsManager ?? throw new Exception ("Settings manager wasn't initilized before attempting to use it."),
         PluginManager = _pluginManager ?? throw new Exception ("Plugin manager wasn't initilized before attempting to use it."),
         HostPluginPath = _hostPluginPath,
