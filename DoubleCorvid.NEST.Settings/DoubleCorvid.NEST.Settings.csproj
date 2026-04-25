@@ -30,8 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DoubleCorvid.Grimoire.Files" Version="0.16.0-ALPHA" />
-    <PackageReference Include="DoubleCorvid.Grimoire.Settings" Version="0.16.0-ALPHA" />
+    <PackageReference Include="DoubleCorvid.Grimoire.Files" Version="0.17.1-ALPHA" />
+    <PackageReference Include="DoubleCorvid.Grimoire.Settings" Version="0.17.1-ALPHA" />
   </ItemGroup>
 
 </Project>
