@@ -1,9 +1,11 @@
+using System.Net;
+
 using DoubleCorvid.Grimoire.Files;
 using DoubleCorvid.NEST.Plugin;
 using DoubleCorvid.NEST.Plugin.Manager;
 using DoubleCorvid.NEST.Settings;
-
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,9 +27,15 @@ public class NESTServer (INESTServerConfig config) : INESTServer{
 
         var appBuilder = WebApplication.CreateBuilder (_config.Args);
 
+        appBuilder.WebHost.ConfigureKestrel (k => {
+            k.Listen (IPAddress.Parse (_config.SettingsManager.NESTSettings.IPAddress), _config.SettingsManager.NESTSettings.Port);
+        });
+
         var pluginManager = _config.PluginManager;
 
         pluginManager.LoadPlugin (_config.HostPluginPath);
+
+        pluginManager.LoadPluginsDirectory ();
 
         var hostPlugin = pluginManager.HostPlugin ?? throw new Exception ("Failed to load the host plugin.");
 

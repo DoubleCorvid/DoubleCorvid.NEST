@@ -26,16 +26,14 @@ public class PluginManager : IPluginManager {
         if (!Directory.Exists (pluginDir)) {
             Directory.CreateDirectory (pluginDir);
         }
-
-        LoadPlugins (pluginDir);
     }
 
     public IReadOnlyDictionary<Guid, IControllerPlugin> ControllerPlugins => new Dictionary<Guid, IControllerPlugin> (_controllerPlugins);
 
-    public IPlugin this [Guid id] => _plugins [id];
+    public IPlugin? this [Guid id] => _plugins.TryGetValue (id, out var cached) ? cached : null;
 
-    private void LoadPlugins (string pluginsDirectory) {
-        var files = Directory.GetFiles (pluginsDirectory).Where (f => Path.GetExtension (f) == ".dll");
+    public void LoadPluginsDirectory () {
+        var files = Directory.GetFiles (_config.SettingsManager.NESTSettings.PluginsDirectory).Where (f => Path.GetExtension (f) == ".dll");
 
         foreach (var file in files) {
             LoadPlugin (file);

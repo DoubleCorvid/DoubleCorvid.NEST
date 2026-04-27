@@ -9,7 +9,9 @@ public interface IPluginManager {
     
     IReadOnlyDictionary<Guid, IServicePlugin> ServicePlugins { get; }
 
-    IPlugin this [Guid id] { get; }
+    IPlugin? this [Guid id] { get; }
+
+    void LoadPluginsDirectory ();
 
     IPlugin LoadPlugin (string file);
 }
