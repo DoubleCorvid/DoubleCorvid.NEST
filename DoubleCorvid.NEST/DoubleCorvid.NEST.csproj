@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationName>DoubleCorvid.NEST</ApplicationName>
     <Title>DoubleCorvid's NEST Server - Metapackage</Title>
-    <Version>0.3.0-ALPHA</Version>
+    <Version>0.4.0-ALPHA</Version>
     <Authors>DoubleCorvid</Authors>
     <Company />
     <Description>Metapackage containing all DoubleCorvid.NEST packages.</Description>
